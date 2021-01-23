@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { Box } from '@material-ui/core';
 
 import { Header } from './components/Header';
 import { PrivateRoute } from './components/PrivateRoute';
 import { auth } from './utils/firebase';
 import { Login } from './login';
-import { Main } from './main';
 import { UserContext } from './utils/authContext';
-import { Box } from '@material-ui/core';
+import { Children } from './children';
+import { NewChild } from './newChild';
 
 export const App = () => {
   const [user, setUser] = useState(null);
@@ -30,7 +31,10 @@ export const App = () => {
             <Login />
           </Route>
           <PrivateRoute exact path="/">
-            <Main />
+            <Children />
+          </PrivateRoute>
+          <PrivateRoute exact path="/new">
+            <NewChild />
           </PrivateRoute>
         </Switch>
       </Box>
