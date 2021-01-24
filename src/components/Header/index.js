@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-
 import MenuIcon from '@material-ui/icons/Menu';
 import { Drawer, Toolbar, Typography } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+
 import { AppBarBottom, MiddleButton } from './styles';
 import { Menu } from './menu';
 
@@ -23,7 +24,9 @@ export const Header = () => {
           >
             <MenuIcon />
           </MiddleButton>
-          <Typography variant="h6">EAT & POO</Typography>
+          <Typography component={Link} to="/" variant="h6">
+            EAT & POO
+          </Typography>
         </Toolbar>
       </AppBarBottom>
       <Drawer

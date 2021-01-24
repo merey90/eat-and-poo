@@ -6,16 +6,17 @@ import {
   ListItemText,
 } from '@material-ui/core';
 import FaceIcon from '@material-ui/icons/Face';
+import { Link } from 'react-router-dom';
 
 export const ChildItem = ({ childData }) => {
   return (
-    <ListItem>
+    <ListItem component={Link} to={`/children/${childData.id}`}>
       <ListItemAvatar>
         <Avatar>
           <FaceIcon />
         </Avatar>
       </ListItemAvatar>
-      <ListItemText primary={childData.name} secondary="Jan 9, 2014" />
+      <ListItemText primary={childData.name} secondary={childData.birthday} />
     </ListItem>
   );
 };

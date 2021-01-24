@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { Box } from '@material-ui/core';
 
 import { Header } from './components/Header';
@@ -31,7 +31,7 @@ export const App = () => {
           <Route path="/login">
             <Login />
           </Route>
-          <PrivateRoute exact path="/">
+          <PrivateRoute exact path="/children">
             <Children />
           </PrivateRoute>
           <PrivateRoute exact path="/new">
@@ -40,6 +40,7 @@ export const App = () => {
           <PrivateRoute exact path="/children/:childId">
             <Child />
           </PrivateRoute>
+          <Redirect to="/children" />
         </Switch>
       </Box>
       <Header />

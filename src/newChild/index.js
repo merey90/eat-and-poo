@@ -4,11 +4,11 @@ import DateFnsUtils from '@date-io/date-fns';
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { format, parse } from 'date-fns';
+import { useHistory } from 'react-router-dom';
 
 import { Form } from './styles';
 import { auth } from '../utils/firebase';
-import { chidrenRef, getParentRef } from '../utils/database';
-import { useHistory } from 'react-router-dom';
+import { childrenRef, getParentRef } from '../utils/database';
 
 export const NewChild = () => {
   const history = useHistory();
@@ -43,7 +43,7 @@ export const NewChild = () => {
       },
     };
 
-    const childRef = chidrenRef.push();
+    const childRef = childrenRef.push();
     childRef
       .set(newChild)
       .then(() => {
