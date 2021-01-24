@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Drawer, Toolbar, Typography } from '@material-ui/core';
+import { Button, Drawer } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
-import { AppBarBottom, MiddleButton } from './styles';
-import { Menu } from './menu';
+import { AppBarBottom, MiddleButton, SToolbar } from './styles';
+import { Menu as CustomMenu } from './menu';
+import { ChildrenMenu } from './childrenMenu';
+import { auth } from '../../utils/firebase';
+import { UserContext } from '../../utils/authContext';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user } = useContext(UserContext);
 
   const toggleDrawer = (toggle) => {
     setIsMenuOpen(toggle);
@@ -16,7 +20,7 @@ export const Header = () => {
   return (
     <>
       <AppBarBottom position="static">
-        <Toolbar variant="dense">
+        <SToolbar variant="dense">
           <MiddleButton
             color="secondary"
             aria-label="menu"
@@ -24,17 +28,18 @@ export const Header = () => {
           >
             <MenuIcon />
           </MiddleButton>
-          <Typography component={Link} to="/" variant="h6">
+          <Button component={Link} to="/">
             EAT & POO
-          </Typography>
-        </Toolbar>
+          </Button>
+          {!!auth.currentUser && !!user && <ChildrenMenu />}
+        </SToolbar>
       </AppBarBottom>
       <Drawer
         anchor={'bottom'}
         open={isMenuOpen}
         onClose={() => toggleDrawer(false)}
       >
-        <Menu toggleDrawer={toggleDrawer} />
+        <CustomMenu id="drawerMenu" toggleDrawer={toggleDrawer} />
       </Drawer>
     </>
   );

@@ -1,23 +1,36 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { Typography } from '@material-ui/core';
+import React, { useContext } from 'react';
+import { Box, LinearProgress } from '@material-ui/core';
 
-import { getChildRef } from '../utils/database';
-import { useParams } from 'react-router-dom';
+import { ChildContext } from '../utils/childContext';
+import { EatButton, HistoryButton, PooButton } from './styles';
 
 export const Child = () => {
-  const { childId } = useParams();
-  const childRef = useMemo(() => getChildRef(childId), [childId]);
-  const [childData, setChildData] = useState({});
+  const { child } = useContext(ChildContext);
 
-  useEffect(() => {
-    childRef.once('value', (sn) => {
-      setChildData(sn.val());
-    });
+  const payload = {
+    server_timestamp: {
+      '.sv': 'timestamp',
+    },
+  };
 
-    return () => {
-      childRef.off();
-    };
-  }, [childRef]);
+  if (!child) return <LinearProgress />;
 
-  return <Typography>{childData.name}</Typography>;
+  return (
+    <Box
+      display="flex"
+      flexDirection="column"
+      justifyContent="flex-end"
+      flex={1}
+    >
+      <EatButton size="large" variant="contained">
+        EAT
+      </EatButton>
+      <PooButton size="large" variant="contained">
+        POO
+      </PooButton>
+      <HistoryButton size="large" variant="contained">
+        HISTORY
+      </HistoryButton>
+    </Box>
+  );
 };

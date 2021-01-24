@@ -1,4 +1,4 @@
-import { AppBar, Fab } from '@material-ui/core';
+import { AppBar, Fab, Toolbar } from '@material-ui/core';
 import styled from 'styled-components';
 
 export const AppBarBottom = styled(AppBar)`
@@ -13,4 +13,8 @@ export const MiddleButton = styled(Fab)`
   left: 0;
   right: 0;
   margin: 0 auto;
+`;
+
+export const SToolbar = styled(Toolbar)`
+  justify-content: space-between;
 `;

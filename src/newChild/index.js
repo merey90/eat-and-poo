@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, TextField } from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -9,6 +9,7 @@ import { useHistory } from 'react-router-dom';
 import { Form } from './styles';
 import { auth } from '../utils/firebase';
 import { childrenRef, getParentRef } from '../utils/database';
+import { ChildContext } from '../utils/childContext';
 
 export const NewChild = () => {
   const history = useHistory();
@@ -17,6 +18,7 @@ export const NewChild = () => {
   const [name, setName] = useState(null);
   const [disabled, setDisabled] = useState(false);
   const [children, setChildren] = useState([]);
+  const { setChild } = useContext(ChildContext);
 
   const parentRef = getParentRef(auth.currentUser.uid);
 
@@ -50,7 +52,8 @@ export const NewChild = () => {
         const childId = childRef.path.pieces_.pop();
         const newChildren = [...children, childId];
         parentRef.set(newChildren);
-        history.push(`/children/${childId}`);
+        setChild({ ...newChild, id: childId });
+        history.push(`/child`);
       })
       .catch((e) => {
         console.error(e);

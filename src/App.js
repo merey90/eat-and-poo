@@ -7,12 +7,13 @@ import { PrivateRoute } from './components/PrivateRoute';
 import { auth } from './utils/firebase';
 import { Login } from './login';
 import { UserContext } from './utils/authContext';
-import { Children } from './children';
 import { NewChild } from './newChild';
 import { Child } from './child';
+import { ChildContext } from './utils/childContext';
 
 export const App = () => {
   const [user, setUser] = useState(null);
+  const [child, setChild] = useState(null);
 
   const removeUser = () => setUser(null);
 
@@ -26,24 +27,23 @@ export const App = () => {
 
   return (
     <UserContext.Provider value={{ user, removeUser }}>
-      <Box display="flex" flexGrow={1} flexDirection="column" p={2}>
-        <Switch>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <PrivateRoute exact path="/children">
-            <Children />
-          </PrivateRoute>
-          <PrivateRoute exact path="/new">
-            <NewChild />
-          </PrivateRoute>
-          <PrivateRoute exact path="/children/:childId">
-            <Child />
-          </PrivateRoute>
-          <Redirect to="/children" />
-        </Switch>
-      </Box>
-      <Header />
+      <ChildContext.Provider value={{ child, setChild }}>
+        <Box display="flex" flexGrow={1} flexDirection="column" p={2}>
+          <Switch>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <PrivateRoute exact path="/new">
+              <NewChild />
+            </PrivateRoute>
+            <PrivateRoute exact path="/child">
+              <Child />
+            </PrivateRoute>
+            <Redirect to="/child" />
+          </Switch>
+        </Box>
+        <Header />
+      </ChildContext.Provider>
     </UserContext.Provider>
   );
 };
