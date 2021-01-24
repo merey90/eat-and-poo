@@ -9,6 +9,7 @@ import { Login } from './login';
 import { UserContext } from './utils/authContext';
 import { Children } from './children';
 import { NewChild } from './newChild';
+import { Child } from './child';
 
 export const App = () => {
   const [user, setUser] = useState(null);
@@ -35,6 +36,9 @@ export const App = () => {
           </PrivateRoute>
           <PrivateRoute exact path="/new">
             <NewChild />
+          </PrivateRoute>
+          <PrivateRoute exact path="/children/:childId">
+            <Child />
           </PrivateRoute>
         </Switch>
       </Box>
