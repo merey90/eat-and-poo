@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Button, Drawer } from '@material-ui/core';
+import { Drawer } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
-import { AppBarBottom, MiddleButton, SToolbar } from './styles';
+import { AppBarBottom, BarButton, MiddleButton, SToolbar } from './styles';
 import { Menu as CustomMenu } from './menu';
 import { ChildrenMenu } from './childrenMenu';
 import { auth } from '../../utils/firebase';
@@ -28,9 +28,9 @@ export const Header = () => {
           >
             <MenuIcon />
           </MiddleButton>
-          <Button component={Link} to="/">
+          <BarButton component={Link} to="/">
             EAT & POO
-          </Button>
+          </BarButton>
           {!!auth.currentUser && !!user && <ChildrenMenu />}
         </SToolbar>
       </AppBarBottom>

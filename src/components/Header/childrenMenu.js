@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { Button, Menu, MenuItem } from '@material-ui/core';
+import { Menu, MenuItem } from '@material-ui/core';
 import { useHistory, Link } from 'react-router-dom';
 
 import { getChildRef, getParentRef } from '../../utils/database';
 import { auth } from '../../utils/firebase';
 import { ChildContext } from '../../utils/childContext';
+import { BarButton, ChildButton } from './styles';
 
 export const ChildrenMenu = () => {
   const [childMenu, setChildMenu] = useState(null);
@@ -69,20 +70,20 @@ export const ChildrenMenu = () => {
 
   if (!child)
     return (
-      <Button component={Link} to="\new">
+      <BarButton component={Link} to="\new">
         New child
-      </Button>
+      </BarButton>
     );
 
   return (
     <>
-      <Button
+      <ChildButton
         aria-controls="childMenu"
         aria-haspopup="true"
         onClick={handleChildMenuOpen}
       >
         {child.name}
-      </Button>
+      </ChildButton>
       <Menu
         id="childMenu"
         keepMounted

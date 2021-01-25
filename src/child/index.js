@@ -23,13 +23,19 @@ export const Child = () => {
       flex={1}
     >
       <EatButton size="large" variant="contained">
-        EAT
+        <span className="emoji" role="img" aria-label="baby bottle">
+          🍼
+        </span>
       </EatButton>
       <PooButton size="large" variant="contained">
-        POO
+        <span className="emoji" role="img" aria-label="pile of poo">
+          💩
+        </span>
       </PooButton>
       <HistoryButton size="large" variant="contained">
-        HISTORY
+        <span className="emoji" role="img" aria-label="spiral calendar">
+          📅
+        </span>
       </HistoryButton>
     </Box>
   );
