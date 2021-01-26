@@ -1,17 +1,13 @@
 import React, { useContext } from 'react';
 import { Box, LinearProgress } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 import { ChildContext } from '../utils/childContext';
-import { EatButton, HistoryButton, PooButton } from './styles';
+import { DashboardButton, EatButton, PooButton } from './styles';
+import { Emoji } from '../components/Emoji';
 
 export const Child = () => {
   const { child } = useContext(ChildContext);
-
-  const payload = {
-    server_timestamp: {
-      '.sv': 'timestamp',
-    },
-  };
 
   if (!child) return <LinearProgress />;
 
@@ -22,21 +18,30 @@ export const Child = () => {
       justifyContent="flex-end"
       flex={1}
     >
-      <EatButton size="large" variant="contained">
-        <span className="emoji" role="img" aria-label="baby bottle">
-          🍼
-        </span>
+      <EatButton
+        size="large"
+        variant="contained"
+        component={Link}
+        to="/event/eat"
+      >
+        <Emoji emoji="eat" />
       </EatButton>
-      <PooButton size="large" variant="contained">
-        <span className="emoji" role="img" aria-label="pile of poo">
-          💩
-        </span>
+      <PooButton
+        size="large"
+        variant="contained"
+        component={Link}
+        to="/event/poo"
+      >
+        <Emoji emoji="poo" />
       </PooButton>
-      <HistoryButton size="large" variant="contained">
-        <span className="emoji" role="img" aria-label="spiral calendar">
-          📅
-        </span>
-      </HistoryButton>
+      <DashboardButton
+        size="large"
+        variant="contained"
+        component={Link}
+        to="/dashboard"
+      >
+        <Emoji emoji="dashboard" />
+      </DashboardButton>
     </Box>
   );
 };

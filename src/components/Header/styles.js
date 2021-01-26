@@ -29,7 +29,7 @@ export const BarButton = styled(Button)`
 
 export const ChildButton = withStyles((theme) => ({
   root: {
-    flexBasis: '40%',
+    maxWidth: '40vw',
     minWidth: 0,
   },
   label: {

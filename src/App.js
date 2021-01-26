@@ -10,6 +10,8 @@ import { UserContext } from './utils/authContext';
 import { NewChild } from './newChild';
 import { Child } from './child';
 import { ChildContext } from './utils/childContext';
+import { NewEvent } from './newEvent';
+import { Dashboard } from './dashboard';
 
 export const App = () => {
   const [user, setUser] = useState(null);
@@ -38,6 +40,12 @@ export const App = () => {
             </PrivateRoute>
             <PrivateRoute exact path="/child">
               <Child />
+            </PrivateRoute>
+            <PrivateRoute exact path="/event/:eventType">
+              <NewEvent />
+            </PrivateRoute>
+            <PrivateRoute exact path="/dashboard">
+              <Dashboard />
             </PrivateRoute>
             <Redirect to="/child" />
           </Switch>

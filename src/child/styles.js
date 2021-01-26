@@ -41,7 +41,7 @@ export const PooButton = withStyles({
   },
 })(Button);
 
-export const HistoryButton = withStyles({
+export const DashboardButton = withStyles({
   ...stylishButton,
   root: {
     ...stylishButton.root,
