@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button } from '@material-ui/core';
 import {
   DatePicker,
@@ -6,28 +6,42 @@ import {
   TimePicker,
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import { Form, FormEmoji } from './styles';
+import { getEatRef, getPooRef } from '../utils/database';
+import { ChildContext } from '../utils/childContext';
 
 export const NewEvent = () => {
   const [disabled, setDisabled] = useState(false);
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState(new Date());
   const { eventType } = useParams();
+  const { child } = useContext(ChildContext);
+  const history = useHistory();
+
+  const refMapper = {
+    eat: getEatRef(child?.id),
+    poo: getPooRef(child?.id),
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setDisabled(true);
-    console.log('date: ', date);
-    console.log('time: ', time);
     const newDate = new Date(`${date.toDateString()} ${time.toTimeString()}`);
-    console.log('newDate: ', newDate);
     const payload = {
-      date: newDate,
+      date: newDate.getTime(),
     };
 
-    // TODO: send payload to backend /eventType/child/
+    const ref = refMapper[eventType];
+    ref
+      .set(payload)
+      .then(() => {
+        history.push(`/child`);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   };
 
   const handleDateChange = (value) => {
